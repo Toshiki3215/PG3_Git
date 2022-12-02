@@ -1,64 +1,88 @@
 #include <stdio.h>
-#include <windows.h>
-#include <time.h>
+#include <stdlib.h>
 
-typedef void (*PFunc)(int*);
-
-void hit(int* s)
+typedef struct cell
 {
-	printf("あたり！\n");
-}
+	int val;
+	struct cell* prev;
+	struct cell* next;
+}CELL;
 
-void miss(int* s)
-{
-	printf("はずれ\n");
-}
-
-void setTimeout(PFunc p, int second)
-{
-	Sleep(second * 1000);
-
-	p(&second);
-}
+void create(CELL* currentCell, int val);
+void index(CELL* endCell);
+CELL* getInsertCellAddress(CELL* endCell, int iterator);
 
 int main()
 {
-	printf("偶数だったら'0 '、奇数だったら'1 'を入力してください。\n");
+	int iterator;
+	int inputValue;
+	CELL* insertCell;
 
-	srand(time(nullptr));
-	int daice = rand() % 6 + 1;
+	CELL head;
+	head.next = nullptr;
+	head.prev = nullptr;
 
-	int num;
-
-	while (true)
+	while (1)
 	{
-		scanf_s("%d", &num);
+		printf("何番目のセルの後ろに挿入しますか？\n");
+		scanf_s("%d", &iterator);
 
-		if (num != 0 && num != 1)
+		printf("挿入する値を入力してください\n");
+		scanf_s("%d", &inputValue);
+
+		insertCell = getInsertCellAddress(&head, iterator);
+		create(insertCell, inputValue);
+
+		index(&head);
+	}
+	return 0;
+}
+
+void create(CELL *currentCell,int val)
+{
+	CELL* newCell;
+	newCell = (CELL*)malloc(sizeof(CELL));
+	newCell->val = val;
+	newCell->prev = currentCell;
+	newCell->next = currentCell->next;
+
+	if (currentCell->next)
+	{
+		CELL* nextCell = currentCell->next;
+		nextCell->prev = newCell;
+	}
+
+	currentCell->next = newCell;
+}
+
+void index(CELL *endCell)
+{
+	int no = 1;
+	while (endCell->next != nullptr)
+	{
+		endCell = endCell->next;
+		printf("%d", no);
+		printf("%p", endCell->prev);
+		printf("%5d", endCell->val);
+		printf("(%p)", endCell);
+		printf("%p\n", endCell->next);
+		no++;
+	}
+
+}
+
+CELL* getInsertCellAddress(CELL *endCell,int iterator)
+{
+	for (int i = 0; i < iterator; i++)
+	{
+		if (endCell->next)
 		{
-			printf("エラー、もう一度入力してください\n");
-			printf("偶数だったら'0 '、奇数だったら'1 'を入力してください。\n");
+			endCell = endCell->next;
 		}
 		else
 		{
 			break;
 		}
 	}
-
-	PFunc p;
-
-	if (daice % 2 == num)
-	{
-		p = hit;
-	}
-	else
-	{
-		p = miss;
-	}
-	setTimeout(p, 1);
-
-	printf("さいころの出目は ' %d '\n", daice);
-
-
-	return 0;
+	return endCell;
 }
