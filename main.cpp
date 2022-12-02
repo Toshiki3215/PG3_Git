@@ -50,21 +50,14 @@ public:
 		Add(value_, cur);
 	}
 
-	/// <summary>
-	/// 一番後ろに追加
-	/// </summary>
-	/// <param name="value_">値</param>
+	// 一番後ろに追加
 	void PushBack(T value_)
 	{
 		Cell<T>* cur = dummy->prev;
 		Add(value_, cur);
 	}
 
-	/// <summary>
-	/// 任意の場所に追加
-	/// </summary>
-	/// <param name="value_">値</param>
-	/// <param name="num">追加する場所(0~)</param>
+	// 任意の場所に追加
 	void Insert(T value_, int num)
 	{
 		Cell<T>* tmpCell = nullptr;
@@ -91,11 +84,7 @@ public:
 		return true;
 	}
 
-	/// <summary>
-	/// 任意の場所の値を変更
-	/// </summary>
-	/// <param name="value_">値</param>
-	/// <param name="num">変更する場所(0~)</param>
+	// 任意の場所の値を変更
 	bool ChangeValue(T value_, int num)
 	{
 
@@ -120,9 +109,7 @@ public:
 
 	}
 
-	/// <summary>
-	/// 一覧表示
-	/// </summary>
+	// 一覧表示
 	void Dump()
 	{
 		Cell<T>* ptr = dummy->next;
@@ -324,7 +311,6 @@ template<typename T>
 void Display(List<T>& list, int& SceneNo, int& displaySceneNo)
 {
 	std::cout << "[要素の表示]" << std::endl;
-	//printf("[要素の表示]\n");
 	std::cout << "1.要素の一覧表示" << std::endl;
 	std::cout << "2.順番を指定して要素を表示" << std::endl;
 	std::cout << "9.要素操作に戻る" << std::endl;
@@ -358,7 +344,6 @@ void Display(List<T>& list, int& SceneNo, int& displaySceneNo)
 		SceneNo = 0;
 	}
 
-
 	//要素操作に戻らなかったら
 	if (displaySceneNo == 1 || displaySceneNo == 2)
 	{
@@ -389,9 +374,7 @@ void Insert(List<T>& list, int& SceneNo)
 	std::string insertNo;
 	while (std::getchar() != '\n');
 
-	std::getline(std::cin, insertNo);
-
-	//std::cin >> insertNo;
+	std::cin >> insertNo;
 
 	if (insertNo == "")
 	{
