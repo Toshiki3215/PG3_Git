@@ -68,7 +68,6 @@ void index(CELL *endCell)
 		printf("%p\n", endCell->next);
 		no++;
 	}
-
 }
 
 CELL* getInsertCellAddress(CELL *endCell,int iterator)
