@@ -7,19 +7,18 @@
 
 int main()
 {
-	int dice;
+	int num;
 	int result = 0;
-	//待ち時間用変数
-	int waitTime = 3000;
+	int second = 3;
 
 	printf("数字を代入してください\n");
-	scanf_s("%d", &dice);
+	scanf_s("%d", &num);
 
-	if (dice % 2 == 0)
+	if (num % 2 == 0)
 	{
 		printf("偶数\n");
 	}
-	else if (dice % 2 == 1)
+	else if (num % 2 == 1)
 	{
 		printf("奇数\n");
 	}
@@ -31,19 +30,20 @@ int main()
 		return result;
 	};
 
-	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int time)
+	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int secomd)
 	{
-		fx(); Sleep(time);
+		fx(); Sleep(second * 1000);
 	};
+
+	setTimeOut(lottery, 3);
 
 	//あたりかはずれか
 	std::function<void(char, int)>compation = [=](char input, int output) {
 		input % 2 == output ? printf("当たり\n") : printf("はずれ\n");
+		printf("ダイスは%d\n", result);
 	};
 
-	setTimeOut(lottery, waitTime);
-
-	compation(dice, result);
+	compation(num, result);
 
 	system("pause");
 	return 0;
