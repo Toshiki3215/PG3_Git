@@ -32,7 +32,8 @@ int main()
 
 	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int secomd)
 	{
-		fx(); Sleep(second * 1000);
+		Sleep(second * 1000);
+		fx(); 
 	};
 
 	setTimeOut(lottery, 3);
