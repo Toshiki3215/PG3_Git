@@ -8,7 +8,7 @@
 int main()
 {
 	int num;
-	int result = 0;
+	int daice = 0;
 	int second = 3;
 
 	printf("数字を代入してください\n");
@@ -23,11 +23,11 @@ int main()
 		printf("奇数\n");
 	}
 
-	std::function<int()> lottery = [&result]()
+	std::function<int()> lottery = [&daice]()
 	{
 		srand(time(nullptr));
-		result = rand() % 2;
-		return result;
+		daice = rand() % 2;
+		return daice;
 	};
 
 	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int secomd)
@@ -36,15 +36,14 @@ int main()
 		fx(); 
 	};
 
-	setTimeOut(lottery, 3);
-
 	//あたりかはずれか
 	std::function<void(char, int)>compation = [=](char input, int output) {
 		input % 2 == output ? printf("当たり\n") : printf("はずれ\n");
-		printf("ダイスは%d\n", result);
+		printf("ダイスは%d\n", daice);
 	};
 
-	compation(num, result);
+	setTimeOut(lottery, 3);
+	compation(num, daice);
 
 	system("pause");
 	return 0;
