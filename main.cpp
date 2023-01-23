@@ -1,50 +1,66 @@
-#include <functional>
-#include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
-#include <random>
-#include "windows.h"
+#include <vector>
+#include <list>
+#include <iostream>
 
-int main()
-{
-	int num;
-	int daice = 0;
-	int second = 3;
+using namespace std;
 
-	printf("数字を代入してください\n");
-	scanf_s("%d", &num);
+int main() {
 
-	if (num % 2 == 0)
-	{
-		printf("偶数\n");
-	}
-	else if (num % 2 == 1)
-	{
-		printf("奇数\n");
-	}
+    //山手線配列
+    std::list<const char*> yamanotesen =
+    {
+        "Tokyo"       ,"Kanda"    ,"Akihabara","Okatimati"   ,"Ueno",
+        "Uguisudani"  ,"Nippori"  ,"Tabata"   ,"Komagome"    ,"Sugamo",
+        "Ootuka"      ,"Ikebukuro","Mejiro"   ,"Takadanobaba","sinokubo",
+        "Shinjuku"    ,"Yoyogi"   ,"Harajuku" ,"Shibuya"     ,"Ebisu",
+        "Meguro"      ,"Gotanda"  ,"Oosaki"   ,"Shinagawa"   ,"Tamati",
+        "Hamamatutyou","Shinbasi" ,"Yurakutyou"
+    };
 
-	std::function<int()> lottery = [&daice]()
-	{
-		srand(time(nullptr));
-		daice = rand() % 2;
-		return daice;
-	};
+    cout << "-----1970-----\n";
 
-	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int secomd)
-	{
-		Sleep(second * 1000);
-		fx(); 
-	};
+    for (auto itr = yamanotesen.begin(); itr != yamanotesen.end(); ++itr)
+    {
+        cout << *itr << "\n";
+    }
 
-	//あたりかはずれか
-	std::function<void(char, int)>compation = [=](char input, int output) {
-		input % 2 == output ? printf("当たり\n") : printf("はずれ\n");
-		printf("ダイスは%d\n", daice);
-	};
+    cout << "\n";
 
-	setTimeOut(lottery, 3);
-	compation(num, daice);
+    cout << "-----2019-----\n"; //西日暮里駅開業
 
-	system("pause");
-	return 0;
+    for (auto itr = yamanotesen.begin(); itr != yamanotesen.end(); ++itr)
+    {
+        if (*itr == "Tabata")
+        {
+            itr = yamanotesen.insert(itr, "Nisinippori");
+            ++itr;
+        }
+    }
+
+    for (auto itr = yamanotesen.begin(); itr != yamanotesen.end(); ++itr)
+    {
+        cout << *itr << "\n";
+    }
+
+    cout << "\n";
+
+    cout << "-----2022-----\n"; //高輪ゲートウェイ駅開業
+
+    for (auto itr = yamanotesen.begin(); itr != yamanotesen.end(); ++itr)
+    {
+        if (*itr == "Tamati")
+        {
+            itr = yamanotesen.insert(itr, "Takanawagettoway");
+            ++itr;
+        }
+    }
+
+    for (auto itr = yamanotesen.begin(); itr != yamanotesen.end(); ++itr)
+    {
+        cout << *itr << "\n";
+    }
+
+    system("pause");
+    return 0;
 }
