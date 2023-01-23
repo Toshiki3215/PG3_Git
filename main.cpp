@@ -9,7 +9,7 @@ int main()
 {
 	int num;
 	int daice = 0;
-	int second = 3;
+	int timer = 3;
 
 	printf("”š‚ğ‘ã“ü‚µ‚Ä‚­‚¾‚³‚¢\n");
 	scanf_s("%d", &num);
@@ -30,9 +30,9 @@ int main()
 		return daice;
 	};
 
-	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int secomd)
+	std::function<void(std::function<void()>, const int)> setTimeOut = [=](std::function<void()> fx, int time)
 	{
-		Sleep(second * 1000);
+		Sleep(time * 1000);
 		fx(); 
 	};
 
@@ -42,7 +42,7 @@ int main()
 		printf("ƒ_ƒCƒX‚Í%d\n", daice);
 	};
 
-	setTimeOut(lottery, 3);
+	setTimeOut(lottery, timer);
 	compation(num, daice);
 
 	system("pause");
