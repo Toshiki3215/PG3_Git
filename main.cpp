@@ -4,7 +4,6 @@
 #include<time.h>
 #include<iostream>
 #include"Enemy.h"
-//using namespace std;
 
 int main()
 {
@@ -48,7 +47,6 @@ int main()
 	delete enemy;
 	delete enemy2;
 	delete enemy3;
-
 
 	system("pause");
 	return 0;
