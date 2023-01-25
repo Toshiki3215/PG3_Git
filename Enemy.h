@@ -8,10 +8,18 @@ class Enemy
 {
 public:
 	
-	void Judgement();
+	void state1(); //‹ßÚ
+	void state2(); //ËŒ‚
+	void state3(); //—£’E
 
-public:
+	void Update();
 
-	static bool isAlive;
+private:
+
+	static void (Enemy::* stateChange[])();
+
+private:
+
+	int state = 0;
 
 };
